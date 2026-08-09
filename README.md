@@ -1,6 +1,6 @@
 # Socks5 Configurator
 
-افزونه‌ی Chrome برای اتصال مرورگر به یک پروکسی محلی SOCKS5، مانند خروجی Nekoray، با امکان تعریف دامنه‌هایی که باید مستقیماً و بدون عبور از پروکسی باز شوند.
+افزونه‌ی Chrome برای اتصال مرورگر به یک پروکسی محلی SOCKS5، با امکان تعریف دامنه‌هایی که باید مستقیماً و بدون عبور از پروکسی باز شوند.
 
 این پروژه یک فورک از [socks5-configurator](https://github.com/txthinking/socks5-configurator) است که با حفظ قابلیت اصلی پروژه، رابط کاربری و روند استفاده از افزونه ساده‌تر و بهبود داده شده است.
 
@@ -85,7 +85,7 @@ MIT License
 
 # Socks5 Configurator
 
-A Chrome extension for connecting the browser to a local SOCKS5 proxy, such as a Nekoray SOCKS5 output, with support for per-domain proxy bypass rules.
+A Chrome extension for connecting the browser to a local SOCKS5 proxy, with support for per-domain proxy bypass rules.
 
 This project is a fork of the original [socks5-configurator](https://github.com/txthinking/socks5-configurator), with UI and usability improvements while preserving the core functionality.
 
