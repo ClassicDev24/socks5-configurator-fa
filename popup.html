@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="popup.css">
+    <title>Socks5 Configurator</title>
+</head>
+<body>
+    <div class="wrap">
+
+        <header class="header">
+            <div class="brand">
+                <img src="images/icon.32.png" alt="" class="logo">
+                <span>Socks5 Configurator</span>
+            </div>
+            <div class="header-actions">
+                <div class="lang-switch">
+                    <button class="lang-btn" data-lang="fa">FA</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+                <button id="openOptions" class="icon-btn" data-i18n-title="settings_tooltip" title="Advanced settings">⚙️</button>
+            </div>
+        </header>
+
+        <section class="card">
+            <div class="row">
+                <div class="row-text">
+                    <div class="row-title">
+                        <span id="statusDot" class="dot off"></span>
+                        <span id="statusText" data-i18n="proxy_off">Proxy is off</span>
+                    </div>
+                    <div class="row-sub" id="serverAddr" data-i18n="server_not_set">Address not set</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="proxySwitch">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </section>
+
+        <section class="card" id="domainSection">
+            <div class="domain-header">
+                <span class="domain-label" data-i18n="current_site_label">Current site</span>
+                <span id="currentDomain" class="domain-name">—</span>
+            </div>
+            <div id="bypassBadge" class="badge" data-i18n="badge_via_vpn">Opens through VPN</div>
+            <button id="bypassBtn" class="bypass-btn" data-i18n="bypass_btn_add">⚡ Bypass this site</button>
+            <p class="hint" data-i18n="hint_text">Bypassing opens this site directly, without the VPN — no need to switch the VPN off and on every time.</p>
+        </section>
+
+        <footer class="footer">
+            <button id="openOptions2" class="link-btn" data-i18n="manage_full_list">Manage full bypass list</button>
+        </footer>
+
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="i18n.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>

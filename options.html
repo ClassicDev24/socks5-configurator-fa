@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="options.css">
+    <title>Socks5 Configurator</title>
+</head>
+<body>
+    <div class="page">
+
+        <header class="top">
+            <div class="brand">
+                <img src="images/icon.48.png" alt="" class="logo">
+                <div>
+                    <h1>Socks5 Configurator</h1>
+                    <p class="sub" data-i18n="brand_sub">Advanced settings</p>
+                </div>
+            </div>
+            <div class="lang-switch">
+                <button class="lang-btn" data-lang="fa">FA</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+        </header>
+
+        <div class="hint-banner" data-i18n="hint_banner">
+            ⚡ To quickly turn the proxy on/off or bypass a site with one click, you don't need this page — just click the extension icon in the toolbar.
+        </div>
+
+        <main class="grid">
+
+            <section class="card">
+                <div class="card-head">
+                    <h2 data-i18n="proxy_card_title">Socks5 Proxy</h2>
+                    <label class="switch">
+                        <input type="checkbox" id="socks5switch" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <p class="card-desc" data-i18n="proxy_card_desc">The Socks5 server address that Chrome's traffic will go through.</p>
+                <input
+                    type="text"
+                    id="socks5server"
+                    class="text-input"
+                    dir="ltr"
+                    data-i18n-placeholder="server_placeholder"
+                    placeholder="Example: 127.0.0.1:1080 or [::1]:1080"
+                    autocomplete="off"
+                    spellcheck="false">
+                <p id="serverError" class="error-text"></p>
+            </section>
+
+            <section class="card">
+                <div class="card-head">
+                    <h2>
+                        <a href="https://github.com/txthinking/bypass/blob/master/china_domain.txt" target="_blank" rel="noopener" data-i18n="bypass_card_title">Bypass List</a>
+                    </h2>
+                    <label class="switch">
+                        <input type="checkbox" id="bypassswitch" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <p class="card-desc" data-i18n-html="bypass_card_desc_html">
+                    Domains that should open directly, without going through the proxy — one per line.
+                </p>
+                <textarea
+                    id="bypassdomain"
+                    class="bypass-textarea"
+                    dir="ltr"
+                    spellcheck="false"
+                    placeholder="cn
+apple.com"></textarea>
+            </section>
+
+            <div class="save-row">
+                <button id="save" class="save-btn" data-i18n="save_btn">Save changes</button>
+                <div id="ing" class="save-spinner" style="display:none;">
+                    <span class="spinner"></span> <span data-i18n="saving_text">Saving…</span>
+                </div>
+                <span id="savedTick" class="saved-tick" data-i18n="saved_tick" style="display:none;">✓ Saved</span>
+            </div>
+
+            <section class="card muted">
+                <p data-i18n-html="brook_html">If you don't have a Socks5 proxy, you can deploy one with Brook.</p>
+                <p data-i18n-html="shiliew_html">If you can't or don't want to deploy your own, you can choose Shiliew.</p>
+            </section>
+
+        </main>
+
+        <footer class="footer" data-i18n-html="footer_credit_html">
+            A project by txthinking
+        </footer>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="i18n.js"></script>
+    <script src="options.js"></script>
+</body>
+</html>
