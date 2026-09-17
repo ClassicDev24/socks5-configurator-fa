@@ -104,22 +104,44 @@ function isHostBypassed(hostname, bypassdomainText) {
 
 // Adds or removes hostname from the stored bypass list and immediately
 // re-applies the proxy settings. Returns the new bypassed state (bool).
+//
+// Important: whether a host counts as "bypassed" is decided by
+// isHostBypassed(), which matches on exact domain, the un-normalized
+// hostname, AND parent-domain suffixes (e.g. "apple.com" in the list also
+// covers "developer.apple.com"). If this function only removed an exact
+// string match, clicking "remove bypass" on a subdomain wouldn't find
+// anything to remove (since only the parent domain is listed) and would
+// instead add a redundant new entry - leaving the popup UI and the actual
+// proxy bypass state out of sync. So we use the same matching rule here to
+// decide what "currently bypassed" means, and remove every list entry that
+// is actually causing the match.
 async function toggleBypassForHost(hostname) {
     const s = await getStorage(["bypassdomain"]);
-    const domains = parseBypassDomains(s.bypassdomain || DEFAULT_BYPASS_DOMAIN_TEXT);
+    const bypassdomainText = s.bypassdomain || DEFAULT_BYPASS_DOMAIN_TEXT;
+    const domains = parseBypassDomains(bypassdomainText);
     const norm = normalizeHost(hostname).toLowerCase();
-    const idx = domains.findIndex((d) => d.toLowerCase() === norm);
+    const full = (hostname || "").toLowerCase();
+    const currentlyBypassed = isHostBypassed(hostname, bypassdomainText);
 
     let bypassed;
-    if (idx >= 0) {
-        domains.splice(idx, 1);
+    let newDomains;
+    if (currentlyBypassed) {
+        // Remove every entry that causes this host to match (exact,
+        // un-normalized, or parent-domain suffix) - not just an
+        // exact-string match on the normalized hostname.
+        newDomains = domains.filter((d) => {
+            const dn = d.toLowerCase();
+            const matches =
+                norm === dn || full === dn || norm.endsWith("." + dn) || full.endsWith("." + dn);
+            return !matches;
+        });
         bypassed = false;
     } else {
-        domains.push(norm);
+        newDomains = [...domains, norm];
         bypassed = true;
     }
 
-    await setStorage({ bypassdomain: domains.join("\n") });
+    await setStorage({ bypassdomain: newDomains.join("\n") });
     // make sure bypass list is actually being honored
     const bs = await getStorage(["bypassswitch"]);
     if ((bs.bypassswitch || "on") !== "on") {
